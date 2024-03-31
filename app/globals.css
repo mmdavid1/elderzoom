@@ -72,7 +72,7 @@
 /* ==== clerk class override ===== */
 
 .cl-userButtonPopoverActionButtonIcon {
-  color: white;
+  color: black;
 }
 
 .cl-logoBox {
@@ -91,7 +91,7 @@
   color: white;
 }
 .cl-userButtonPopoverActionButton {
-  color: white;
+  color: black;
 }
 
 /* =============================== */
