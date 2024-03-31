@@ -7,14 +7,12 @@ import { useGetCalls } from '@/hooks/useGetCalls';
 import MeetingCard from './MeetingCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useToast } from './ui/use-toast';
 
 const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   const router = useRouter();
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
-  const { toast }= useToast()
 
   const getCalls = () => {
     switch (type) {
@@ -26,7 +24,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
         return upcomingCalls;
       default:
         return [];
-    } 
+    }
   };
 
   const getNoCallsMessage = () => {
@@ -44,7 +42,6 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
 
   useEffect(() => {
     const fetchRecordings = async () => {
-    try {  
       const callData = await Promise.all(
         callRecordings?.map((meeting) => meeting.queryRecordings()) ?? [],
       );
@@ -54,9 +51,6 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
         .flatMap((call) => call.recordings);
 
       setRecordings(recordings);
-      } catch (e) {
-        toast( { title: 'Something is not right, try agian later' })
-      }
     };
 
     if (type === 'recordings') {
